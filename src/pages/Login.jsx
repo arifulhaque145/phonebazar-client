@@ -23,7 +23,7 @@ export default function Login() {
 
   return (
     <div className="lg:py-32 py-12 flex items-center justify-center">
-      <div className="card lg:w-1/3 bg-base-100 shadow-xl">
+      <div className="card lg:w-1/3 bg-slate-900 shadow-xl">
         <div className="card-body">
           <h2 className="text-2xl font-thin uppercase text-center mb-4">
             Login Your Account
@@ -54,7 +54,10 @@ export default function Login() {
             </div>
 
             <div className="form-control mt-4">
-              <button type="submit" className="btn btn-warning w-full">
+              <button
+                type="submit"
+                className="btn bg-slate-600 hover:bg-slate-700 hover:text-slate-300 w-full"
+              >
                 Login
               </button>
             </div>

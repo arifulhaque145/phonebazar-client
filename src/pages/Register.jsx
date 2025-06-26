@@ -22,7 +22,7 @@ export default function Register() {
 
   return (
     <div className="lg:py-32 py-12 flex items-center justify-center">
-      <div className="card lg:w-1/3 bg-base-100 shadow-xl">
+      <div className="card lg:w-1/3 bg-slate-900 shadow-xl">
         <div className="card-body">
           <h2 className="text-2xl font-thin uppercase text-center mb-4">
             Register Now

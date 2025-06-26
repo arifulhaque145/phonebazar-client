@@ -13,7 +13,7 @@ export default function ProductDetails() {
   if (isLoading) return <p className="my-2">Loading...</p>;
 
   return (
-    <div className="py-8 min-h-screen mx-auto">
+    <div className="min-h-screen mx-auto">
       <PhoneCard phone={productData} review={reviews} />
       <div>
         <h3 className="text-xl font-semibold my-4">Write a Review</h3>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const state = true;
@@ -7,24 +8,36 @@ export default function Navbar() {
     <div className="bg-gray-900">
       <div className="navbar md:w-2/3 md:mx-auto shadow-md p-4">
         <div className="flex-1">
-          <Link to="/" className="text-xl font-semibold uppercase">
+          <Link to="/" className="text-white text-xl font-semibold uppercase">
             PhoneBazar
           </Link>
         </div>
 
         <div className="hidden lg:flex gap-4">
-          <Link to="/" className="btn btn-ghost">
+          <Link
+            to="/"
+            className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 text-white"
+          >
             Home
           </Link>
-          <Link to="/phones" className="btn btn-ghost">
+          <Link
+            to="/phones"
+            className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 text-white hover:text-black"
+          >
             Products
           </Link>
           {state ? (
             <>
-              <Link to="/login" className="btn btn-ghost">
+              <Link
+                to="/login"
+                className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 text-white"
+              >
                 Login
               </Link>
-              <Link to="/register" className="btn btn-ghost btn-outline">
+              <Link
+                to="/register"
+                className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 btn-outline text-white"
+              >
                 Register
               </Link>
             </>
@@ -38,6 +51,7 @@ export default function Navbar() {
               </Link>
             </>
           )}
+          <ThemeToggle />
         </div>
 
         <div className="lg:hidden">
