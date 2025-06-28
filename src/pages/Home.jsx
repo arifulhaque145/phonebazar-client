@@ -1,6 +1,6 @@
 import HeroSection from "../components/home/HeroSection";
-import Newsletter from "../components/home/Newsletter";
 import PopularPhones from "../components/home/PopularPhones";
+import TestimonialForm from "../components/home/TestimonialForm";
 import Testimonials from "../components/home/Testimonials";
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
       <HeroSection />
       <PopularPhones />
       <Testimonials />
-      <Newsletter />
+      <TestimonialForm />
     </div>
   );
 }

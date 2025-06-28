@@ -1,12 +1,13 @@
 import { FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
+import avatar from "../../assets/avatar.png";
 
 export default function Comment({ comment, deletePost, setToggle }) {
   return (
     <div className="flex items-center gap-4 p-4 shadow-sm mb-4 border border-white rounded-md bg-white">
       {/* Profile Image */}
       <img
-        src="https://www.pngarts.com/files/3/Avatar-PNG-Download-Image.png"
+        src={avatar}
         alt="Profile"
         className="w-12 h-12 rounded-full object-cover"
       />

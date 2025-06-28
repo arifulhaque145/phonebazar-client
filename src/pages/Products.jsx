@@ -1,14 +1,43 @@
+import { useState } from "react";
 import ProductCard from "../components/phone/ProductCard";
 import SearchSection from "../components/phone/SearchSection";
 import { useAllProductData } from "../hooks/useProducts";
 
 export default function Products() {
-  const { data: products } = useAllProductData();
+  const { data } = useAllProductData();
+  const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("");
+
+  let products = data?.filter((item) =>
+    item.model.toLowerCase().includes(query.toLowerCase())
+  );
+
+  switch (filter) {
+    case "name (a - z)":
+      products = products?.sort((a, b) => a.model.localeCompare(b.model));
+      break;
+
+    case "name (z - a)":
+      products = products?.sort((a, b) => b.model.localeCompare(a.model));
+      break;
+
+    case "price (low to high)":
+      products = products?.sort((a, b) => a.price - b.price);
+      break;
+
+    case "price (high to low)":
+      products = products?.sort((a, b) => b.price - a.price);
+      break;
+
+    default:
+      products = products?.sort((a, b) => a._id.localeCompare(b._id));
+      break;
+  }
 
   return (
     <div className="">
       <div className="lg:px-48 py-12">
-        <SearchSection />
+        <SearchSection setQuery={setQuery} setFilter={setFilter} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-4">
         {products?.map((phone) => (

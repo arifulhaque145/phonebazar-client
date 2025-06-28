@@ -1,16 +1,34 @@
-export default function SearchSection() {
+import { useForm } from "react-hook-form";
+
+export default function SearchSection({ setQuery, setFilter }) {
+  const { register, watch } = useForm();
+  const fruitOptions = [
+    "Name (A - Z)",
+    "Name (Z - A)",
+    "Price (Low to High)",
+    "Price (High to Low)",
+  ];
+
+  setQuery(watch("query", ""));
+  setFilter(watch("filter", ""));
+
   return (
     <section className="flex justify-center xs:w-fit">
-      <form action="" className="flex items-center">
-        <input
-          type="text"
-          placeholder="Search your favourite phone..."
-          className="bg-amber-50 text-black mr-2 px-4 py-2 rounded-sm w-fit lg:w-96"
-        />
-        <button type="submit" className="btn">
-          Search
-        </button>
-      </form>
+      <input
+        type="text"
+        placeholder="Search your favourite phone..."
+        className="bg-amber-50 text-black px-4 py-2 rounded-sm w-fit lg:w-3/4"
+        {...register("query")}
+      />
+
+      <select className="ml-2 btn" {...register("filter")}>
+        <option value="">Sort By (None)</option>
+        {fruitOptions.map((fruit) => (
+          <option key={fruit} value={fruit.toLowerCase()}>
+            {fruit}
+          </option>
+        ))}
+      </select>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useAllProductData } from "../../hooks/useProducts";
 import ProductCard from "../phone/ProductCard";
 
@@ -16,7 +17,12 @@ export default function PopularPhones() {
     <section className="my-2 rounded-sm">
       <div className="flex items-center justify-between mb-0.5 bg-slate-800 p-2">
         <h2 className="text-3xl font-light uppercase">Popular Phones</h2>
-        <button className="text-blue-600">See More</button>
+        <Link
+          to={"/phones"}
+          className="text-blue-600 hover:font-bold hover:duration-400 cursor-pointer"
+        >
+          See More
+        </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-2 bg-slate-800">
         {popularProducts?.map((product) => (

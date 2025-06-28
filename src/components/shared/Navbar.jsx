@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle";
+import useAuth from "../../hooks/useAuth";
+import { logoutUser } from "../../hooks/useFirebaseAuth";
 
 export default function Navbar() {
-  const state = true;
+  const { state } = useAuth();
+  const user = state?.user;
 
   return (
     <div className="bg-gray-900">
@@ -26,7 +28,7 @@ export default function Navbar() {
           >
             Products
           </Link>
-          {state ? (
+          {!user ? (
             <>
               <Link
                 to="/login"
@@ -34,24 +36,28 @@ export default function Navbar() {
               >
                 Login
               </Link>
-              <Link
-                to="/register"
-                className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 btn-outline text-white"
-              >
+              <Link to="/register" className="btn btn-ghost">
                 Register
               </Link>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-ghost">
-                Avatar
+              <Link
+                to="/dashboard"
+                className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 text-white hover:text-black"
+              >
+                Dashboard
               </Link>
-              <Link to="/register" className="btn btn-ghost">
+              <button
+                onClick={() => {
+                  logoutUser();
+                }}
+                className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 btn-outline text-white"
+              >
                 Logout
-              </Link>
+              </button>
             </>
           )}
-          <ThemeToggle />
         </div>
 
         <div className="lg:hidden">
@@ -82,7 +88,7 @@ export default function Navbar() {
               <li>
                 <Link to="/products">Products</Link>
               </li>
-              {state ? (
+              {!user ? (
                 <>
                   <li>
                     <Link to="/login">Login</Link>
@@ -94,7 +100,7 @@ export default function Navbar() {
               ) : (
                 <>
                   <li>
-                    <Link to="/login">Avatar</Link>
+                    <Link to="/login">Dashboard</Link>
                   </li>
                   <li>
                     <Link to="/register">Logout</Link>

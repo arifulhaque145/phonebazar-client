@@ -7,13 +7,14 @@ import { AuthProvider } from "./providers/AuthProvider.jsx";
 import router from "./routes/Router.jsx";
 
 const queryClient = new QueryClient();
+document.documentElement.setAttribute("data-theme", "dark");
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
         <RouterProvider router={router} />
-      </QueryClientProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 );

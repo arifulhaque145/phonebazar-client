@@ -1,24 +1,29 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import GoogleLogin from "../components/shared/GoogleLogin";
+import { loginUser } from "../hooks/useFirebaseAuth";
 
 export default function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    remember: false,
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isLoading },
+  } = useForm();
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+  const navigate = useNavigate();
+  const [firebaseError, setFirebaseError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Data:", formData);
-    // Send to server via fetch/axios here
+  const onSubmit = async ({ email, password }) => {
+    try {
+      const userCredential = await loginUser(email, password);
+      console.log("User logged in:", userCredential?.user);
+      setFirebaseError("");
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error.message);
+      setFirebaseError("Invalid email or password");
+    }
   };
 
   return (
@@ -28,40 +33,49 @@ export default function Login() {
           <h2 className="text-2xl font-thin uppercase text-center mb-4">
             Login Your Account
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
               <input
                 type="email"
-                name="email"
+                placeholder="Email"
+                {...register("email", { required: "Email is required" })}
                 className="input input-bordered"
-                placeholder="you@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
               />
+              {errors.email && (
+                <p className="text-error">{errors.email.message}</p>
+              )}
             </div>
 
             <div className="form-control mt-4">
               <input
                 type="password"
-                name="password"
+                placeholder="Password"
+                {...register("password", { required: "Password is required" })}
                 className="input input-bordered"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={handleChange}
-                required
               />
+              {errors.password && (
+                <p className="text-error">{errors.password.message}</p>
+              )}
             </div>
 
             <div className="form-control mt-4">
               <button
                 type="submit"
                 className="btn bg-slate-600 hover:bg-slate-700 hover:text-slate-300 w-full"
+                disabled={isLoading}
               >
-                Login
+                {isLoading ? "Loading..." : "Login"}
               </button>
             </div>
+            {firebaseError && (
+              <p className="text-error mt-2">{firebaseError}</p>
+            )}
           </form>
+          <div className="divider">OR</div>
+
+          {/* Google Button */}
+          <GoogleLogin />
+
           <p className="text-center text-sm mt-4">
             Don’t have an account?{" "}
             <a href="#" className="text-warning hover:underline">

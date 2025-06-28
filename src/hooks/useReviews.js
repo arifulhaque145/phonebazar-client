@@ -49,7 +49,7 @@ export const usePostSingleReviewData = () => {
   });
 };
 
-// Post a single review
+// Update a single review
 export const useUpdateSingleReviewData = () => {
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();

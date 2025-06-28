@@ -1,23 +1,31 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import GoogleLogin from "../components/shared/GoogleLogin";
+import { registerUser, usePostSingleUserData } from "../hooks/useFirebaseAuth";
 
 export default function Register() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    remember: false,
-  });
+  const navigate = useNavigate();
+  const [firebaseError, setFirebaseError] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isLoading },
+  } = useForm();
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "checkbox" ? checked : value,
-    });
-  };
+  const { mutate: postUser } = usePostSingleUserData();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Login Data:", formData);
+  const onSubmit = async ({ name, email, password }) => {
+    try {
+      registerUser(name, email, password).then(() =>
+        postUser({ name, email, password })
+      );
+
+      setFirebaseError("");
+      navigate("/"); // redirect after registration
+    } catch (err) {
+      setFirebaseError(err.message);
+    }
   };
 
   return (
@@ -27,17 +35,19 @@ export default function Register() {
           <h2 className="text-2xl font-thin uppercase text-center mb-4">
             Register Now
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
               <input
                 type="text"
                 name="name"
                 className="input input-bordered"
                 placeholder="your name"
-                value={formData.email}
-                onChange={handleChange}
-                required
+                {...register("name", { required: "Name is required" })}
+                // required
               />
+              {errors.name && (
+                <p className="text-error">{errors.name.message}</p>
+              )}
             </div>
 
             <div className="form-control mt-4">
@@ -46,10 +56,12 @@ export default function Register() {
                 name="email"
                 className="input input-bordered"
                 placeholder="you@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
+                {...register("email", { required: "Email is required" })}
+                // required
               />
+              {errors.email && (
+                <p className="text-error">{errors.email.message}</p>
+              )}
             </div>
 
             <div className="form-control mt-4">
@@ -58,18 +70,29 @@ export default function Register() {
                 name="your password"
                 className="input input-bordered"
                 placeholder="••••••••"
-                value={formData.password}
-                onChange={handleChange}
-                required
+                {...register("password", { required: "Password is required" })}
+                // required
               />
+              {errors.password && (
+                <p className="text-error">{errors.password.message}</p>
+              )}
             </div>
 
             <div className="form-control mt-4">
               <button type="submit" className="btn btn-warning w-full">
-                Register
+                {isLoading ? "Loading..." : "Register"}
               </button>
             </div>
+
+            {firebaseError && (
+              <p className="text-error mt-2">{firebaseError}</p>
+            )}
           </form>
+          <div className="divider">OR</div>
+
+          {/* Google Button */}
+          <GoogleLogin />
+
           <p className="text-center text-sm mt-4">
             Don’t have an account?{" "}
             <a href="#" className="text-warning hover:underline">
