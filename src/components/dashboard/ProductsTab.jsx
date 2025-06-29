@@ -1,6 +1,12 @@
 import { useAllProductData } from "../../hooks/useProducts";
 
 function TableRow({ row }) {
+  const handleRowEdit = (id) => {
+    console.log("Edit your product: ", id);
+  };
+  const handleRowDelete = (id) => {
+    console.log("Delete your product: ", id);
+  };
   return (
     <tr>
       <th>{row.index + 1}</th>
@@ -8,8 +14,18 @@ function TableRow({ row }) {
       <td>{row.product.brand}</td>
       <td>{row.product.price}</td>
       <td>
-        <button className="btn mr-4 btn-info">Edit</button>
-        <button className="btn btn-error">Delete</button>
+        <button
+          onClick={() => handleRowEdit(row.product._id)}
+          className="btn mr-4 btn-info"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => handleRowDelete(row.product._id)}
+          className="btn btn-error"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   );
@@ -22,7 +38,7 @@ export default function ProductsTab() {
   return (
     <div>
       <h1 className="font-thin text-3xl mb-12 text-center">
-        {products.length} Products Are Here
+        {products?.length} Products Are Here
       </h1>
       <div className="overflow-x-auto">
         <table className="table">

@@ -21,7 +21,7 @@ export default function Users() {
   return (
     <div>
       <h1 className="font-thin text-3xl mb-12 text-center">
-        {users.length} Users Are Here
+        {users?.length} Users Are Here
       </h1>
       <div className="overflow-x-auto">
         <table className="table">
