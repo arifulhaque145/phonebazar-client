@@ -1,11 +1,13 @@
+import image from "../../assets/avatar.png";
+
 export default function TestimonialCard({ testimonial }) {
   const { name, email, message } = testimonial;
 
   return (
-    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 border border-gray-100">
+    <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 py-8 border border-gray-100">
       <div className="flex flex-col items-center">
         <img
-          src="https://i.pravatar.cc/100?img=12"
+          src={image}
           alt="Client"
           className="w-16 h-16 rounded-full object-cover"
         />
