@@ -11,32 +11,15 @@ export const useAllTestimonialData = () => {
       const res = await axiosPublic
         .get("/testimonials")
         .then((response) => response.data);
-      return res.data;
+      return res;
     },
   });
 };
 
-// Post a single review
-export const usePostSingleReviewData = () => {
-  const axiosPublic = useAxiosPublic();
-  const queryClient = useQueryClient();
-  const { refetch } = useAllTestimonialData();
-
-  return useMutation({
-    mutationFn: (reviewData) =>
-      axiosPublic.post("/testimonials", reviewData).then((res) => res.data),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["testimonials"]);
-      refetch();
-    },
-  });
-};
-
-// Post a single review
+// Update a single review
 export const useUpdateSingleReviewData = () => {
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
-  const { refetch } = useAllTestimonialData();
 
   return useMutation({
     mutationFn: (updateReviewData) =>
@@ -45,7 +28,20 @@ export const useUpdateSingleReviewData = () => {
         .then((res) => res.data),
     onSuccess: () => {
       queryClient.invalidateQueries(["testimonials"]);
-      refetch();
+    },
+  });
+};
+
+// Post a single review
+export const usePostSingleReviewData = () => {
+  const axiosPublic = useAxiosPublic();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (reviewData) =>
+      axiosPublic.post("/testimonials", reviewData).then((res) => res.data),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["testimonials"]);
     },
   });
 };
@@ -54,14 +50,12 @@ export const useUpdateSingleReviewData = () => {
 export const useDeleteSingleReviewData = () => {
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
-  const { refetch } = useAllTestimonialData();
 
   return useMutation({
     mutationFn: (reviewId) =>
       axiosPublic.delete(`/testimonials/${reviewId}`).then((res) => res.data),
     onSuccess: () => {
       queryClient.invalidateQueries(["testimonials"]);
-      refetch();
     },
   });
 };

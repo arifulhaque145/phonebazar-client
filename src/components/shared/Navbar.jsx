@@ -15,7 +15,7 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className="hidden lg:flex gap-4">
+        <div className="hidden lg:flex gap-2">
           <Link
             to="/"
             className="btn btn-ghost dark:hover:bg-white dark:hover:text-slate-800 text-white"
@@ -86,7 +86,7 @@ export default function Navbar() {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/products">Products</Link>
+                <Link to="/phones">Products</Link>
               </li>
               {!user ? (
                 <>
@@ -100,10 +100,17 @@ export default function Navbar() {
               ) : (
                 <>
                   <li>
-                    <Link to="/login">Dashboard</Link>
+                    <Link to="/dashboard">Dashboard</Link>
                   </li>
                   <li>
-                    <Link to="/register">Logout</Link>
+                    <button
+                      onClick={() => {
+                        logoutUser();
+                      }}
+                      className="btn btn-ghost w-full text-left"
+                    >
+                      Logout
+                    </button>
                   </li>
                 </>
               )}

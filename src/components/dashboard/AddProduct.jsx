@@ -12,7 +12,7 @@ export default function AddProduct() {
   const { mutate: postProduct } = usePostSingleProductData();
 
   const onSubmit = async (data) => {
-    postProduct(data);
+    await postProduct(data);
     reset();
   };
 

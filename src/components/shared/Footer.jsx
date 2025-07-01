@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div className=" bg-gray-900">
-      <footer className="footer md:w-2/3 md:mx-auto p-10 text-base-content flex justify-between items-start">
+    <div className="bg-gray-900">
+      <footer className="footer md:w-2/3 md:mx-auto p-10 text-white flex justify-between items-start">
         <div>
           <h2 className="footer-title">PhoneBazar</h2>
           <p>Your trusted mobile phone marketplace.</p>

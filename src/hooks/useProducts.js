@@ -8,7 +8,7 @@ export const useAllProductData = () => {
   return useQuery({
     queryKey: ["phones"],
     queryFn: async () => {
-      const { data } = await axiosPublic.get("/phones").then((res) => res.data);
+      const data = await axiosPublic.get("/phones").then((res) => res.data);
       return data;
     },
   });
@@ -21,7 +21,7 @@ export const useSingleProductData = (productId) => {
   return useQuery({
     queryKey: ["phones", productId],
     queryFn: async () => {
-      const { data } = await axiosPublic
+      const data = await axiosPublic
         .get(`/phones/${productId}`)
         .then((res) => res.data);
       return data;

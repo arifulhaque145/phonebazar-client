@@ -19,7 +19,7 @@ export default function Newsletter() {
           name="text"
           className="input input-bordered w-full max-w-xs mb-4 block mr-4"
         />
-        <button type="submit" className="btn btn-primary mr">
+        <button type="submit" className="btn btn-primary mr-4">
           Submit
         </button>
       </form>

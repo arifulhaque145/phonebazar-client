@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-export default function ProductCard({ product }) {
-  const { _id, brand, model, price, image } = product;
+export default function ProductCard({ product = {} }) {
+  const { _id = "", brand = "", model = "", price = "", image = "" } = product;
 
   return (
     <div className="card bg-slate-900 w-full shadow-sm justify-between">

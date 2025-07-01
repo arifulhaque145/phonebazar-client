@@ -69,8 +69,8 @@ export default function TestimonialForm() {
                 },
               })}
             />
-            {errors.comment && (
-              <p className="text-error">{errors.comment.message}</p>
+            {errors.message && (
+              <p className="text-error">{errors.message.message}</p>
             )}
           </div>
 

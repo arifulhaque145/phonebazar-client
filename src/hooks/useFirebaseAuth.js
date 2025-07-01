@@ -14,11 +14,11 @@ export const loginUser = (email, password) => {
 };
 
 export const registerUser = (name, email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password).then(
-    updateProfile(auth.currentUser, {
+  return createUserWithEmailAndPassword(auth, email, password).then(() => {
+    return updateProfile(auth.currentUser, {
       displayName: name,
-    })
-  );
+    });
+  });
 };
 
 export const googleLogin = async () => {

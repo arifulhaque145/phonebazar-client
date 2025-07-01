@@ -19,7 +19,7 @@ export default function Navbar() {
           </svg>
         </label>
       </div>
-      <div className="flex-1 justify-between px-4 text-xl font-bold">
+      <div className="flex flex-1 justify-between px-4 text-xl font-bold">
         <h1 className="uppercase">Admin Dashboard</h1>
       </div>
     </div>

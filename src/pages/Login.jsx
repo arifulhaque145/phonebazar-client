@@ -8,13 +8,14 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isLoading },
+    formState: { errors },
   } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const [firebaseError, setFirebaseError] = useState("");
-
   const onSubmit = async ({ email, password }) => {
+    setIsLoading(true);
     try {
       const userCredential = await loginUser(email, password);
       console.log("User logged in:", userCredential?.user);
@@ -23,6 +24,8 @@ export default function Login() {
     } catch (error) {
       console.error("Login failed:", error.message);
       setFirebaseError("Invalid email or password");
+    } finally {
+      setIsLoading(false);
     }
   };
 

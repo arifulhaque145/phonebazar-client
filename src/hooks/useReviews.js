@@ -23,12 +23,12 @@ export const useSingleReviewData = (reviewId) => {
   return useQuery({
     queryKey: ["review", reviewId],
     queryFn: async () => {
-      const { data } = await axiosPublic
+      const data = await axiosPublic
         .get(`/reviews/${reviewId}`)
         .then((res) => res.data);
       return data;
     },
-    onSuccess: refetch(),
+    onSuccess: refetch,
     enabled: !!reviewId,
   });
 };

@@ -17,7 +17,7 @@ export default function GoogleLogin() {
         email: userCredential?.user?.email,
       };
 
-      postUser(newUser);
+      await postUser(newUser);
 
       navigate("/");
     } catch (error) {

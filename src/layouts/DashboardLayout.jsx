@@ -12,7 +12,9 @@ export default function DashboardLayout() {
           <Outlet />
         </main>
       </div>
-      <Sidebar />
+      <div className="drawer-side">
+        <Sidebar />
+      </div>
     </div>
   );
 }

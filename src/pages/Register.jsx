@@ -17,10 +17,8 @@ export default function Register() {
 
   const onSubmit = async ({ name, email, password }) => {
     try {
-      registerUser(name, email, password).then(() =>
-        postUser({ name, email, password })
-      );
-
+      await registerUser(name, email, password);
+      postUser({ name, email, password });
       setFirebaseError("");
       navigate("/"); // redirect after registration
     } catch (err) {
@@ -67,7 +65,7 @@ export default function Register() {
             <div className="form-control mt-4">
               <input
                 type="password"
-                name="your password"
+                name="password"
                 className="input input-bordered"
                 placeholder="••••••••"
                 {...register("password", { required: "Password is required" })}

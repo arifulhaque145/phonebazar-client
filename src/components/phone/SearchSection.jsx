@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 export default function SearchSection({ setQuery, setFilter }) {
   const { register, watch } = useForm();
@@ -9,8 +10,13 @@ export default function SearchSection({ setQuery, setFilter }) {
     "Price (High to Low)",
   ];
 
-  setQuery(watch("query", ""));
-  setFilter(watch("filter", ""));
+  const query = watch("query", "");
+  const filter = watch("filter", "");
+
+  useEffect(() => {
+    setQuery(query);
+    setFilter(filter);
+  }, [query, filter, setQuery, setFilter]);
 
   return (
     <section className="flex justify-center xs:w-fit">

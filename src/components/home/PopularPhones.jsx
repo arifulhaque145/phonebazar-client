@@ -11,7 +11,7 @@ const getRandomProducts = (products, count) => {
 
 export default function PopularPhones() {
   const { data } = useAllProductData();
-  const popularProducts = useMemo(() => getRandomProducts(data, 4), [data]);
+  const popularProducts = useMemo(() => getRandomProducts(data || [], 4), [data]);
 
   return (
     <section className="my-2 rounded-sm">

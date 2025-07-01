@@ -4,8 +4,8 @@ function TableRow({ row }) {
   return (
     <tr>
       <th>{row.index + 1}</th>
-      <td>{row.user.name}</td>
-      <td>{row.user.email}</td>
+      <td>{row.user?.name || "N/A"}</td>
+      <td>{row.user?.email || "N/A"}</td>
       <td>
         <button className="btn mr-4 btn-info">Edit</button>
         <button className="btn btn-error">Delete</button>

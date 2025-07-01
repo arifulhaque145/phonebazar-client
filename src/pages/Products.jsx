@@ -8,38 +8,50 @@ export default function Products() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
 
-  let products = data?.filter((item) =>
-    item.model.toLowerCase().includes(query.toLowerCase())
-  );
-
   const [page, setPage] = useState(1);
   const itemsPerPage = 8;
 
-  const totalPages = Math.ceil(data?.length / itemsPerPage);
+  // Filter
+  let filteredProducts =
+    data?.filter((item) =>
+      item.model.toLowerCase().includes(query.toLowerCase())
+    ) || [];
 
-  products = data?.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-
+  // Sort
   switch (filter) {
     case "name (a - z)":
-      products = products?.sort((a, b) => a.model.localeCompare(b.model));
+      filteredProducts = filteredProducts.sort((a, b) =>
+        a.model.localeCompare(b.model)
+      );
       break;
 
     case "name (z - a)":
-      products = products?.sort((a, b) => b.model.localeCompare(a.model));
+      filteredProducts = filteredProducts.sort((a, b) =>
+        b.model.localeCompare(a.model)
+      );
       break;
 
     case "price (low to high)":
-      products = products?.sort((a, b) => a.price - b.price);
+      filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
       break;
 
     case "price (high to low)":
-      products = products?.sort((a, b) => b.price - a.price);
+      filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
       break;
 
     default:
-      products = products?.sort((a, b) => a._id.localeCompare(b._id));
+      filteredProducts = filteredProducts.sort((a, b) =>
+        a._id.localeCompare(b._id)
+      );
       break;
   }
+
+  // Pagination
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const products = filteredProducts.slice(
+    (page - 1) * itemsPerPage,
+    page * itemsPerPage
+  );
 
   return (
     <div className="">

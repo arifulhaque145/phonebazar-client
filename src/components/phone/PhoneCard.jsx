@@ -30,10 +30,11 @@ export default function PhoneCard({ phone, review }) {
               <input
                 key={star}
                 type="radio"
-                name="static-rating"
+                name={`static-rating-${phone.id || phone.model}`}
                 className="mask mask-star-2 bg-orange-400"
-                checked={parseInt(average) - 1 === star}
+                checked={star < Math.round(average)}
                 disabled
+                readOnly
               />
             ))}
           </div>

@@ -33,7 +33,7 @@ function TableRow({ row }) {
 
 export default function ProductsTab() {
   const { data } = useAllProductData();
-  const products = data;
+  const products = Array.isArray(data) ? data : [];
 
   return (
     <div>

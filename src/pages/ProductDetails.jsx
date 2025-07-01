@@ -19,12 +19,12 @@ export default function ProductDetails() {
         <h3 className="text-xl font-semibold my-4">Write a Review</h3>
         <CommentForm productId={productData?._id} />
         <hr className="border-t-2 border-gray-500 my-4" />
-        {reviews?.length !== 0 && (
+        {Array.isArray(reviews) && reviews.length > 0 && (
           <h3 className="text-xl font-semibold my-4">
-            Total Reviews: {reviews?.length}
+            Total Reviews: {reviews.length}
           </h3>
         )}
-        <CommentList reviews={reviews} />
+        <CommentList reviews={reviews || []} />
       </div>
     </div>
   );

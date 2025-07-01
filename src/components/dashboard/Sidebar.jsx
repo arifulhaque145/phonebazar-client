@@ -10,7 +10,7 @@ export default function Sidebar() {
             Go To Main Page
           </Link>
         </li>
-        <div className="divider" />
+        <li className="divider" />
         <li>
           <Link to="/dashboard">Home</Link>
         </li>

@@ -11,7 +11,7 @@ import ProductDetails from "../pages/ProductDetails";
 import Products from "../pages/Products";
 import Register from "../pages/Register";
 
-export const BASE_URL = import.meta.env.VITE_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const router = createBrowserRouter([
   {

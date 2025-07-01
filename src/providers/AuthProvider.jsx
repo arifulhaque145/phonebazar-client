@@ -27,16 +27,16 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch({ type: "LOGIN", payload: user?.email });
+        dispatch({ type: actionTypes.login, payload: user?.email });
       } else {
-        dispatch({ type: "LOGOUT" });
+        dispatch({ type: actionTypes.logout });
       }
     });
 
     return () => unsubscribe();
   }, []);
 
-  const setUser = (user) => dispatch({ type: "LOGIN", payload: user });
+  const setUser = (user) => dispatch({ type: actionTypes.login, payload: user });
 
   const actions = { setUser };
 
