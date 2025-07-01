@@ -1,4 +1,11 @@
 import { useAllTestimonialData } from "../../hooks/useTestimonials";
+import TestimonialCard from "./TestimonialCard";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Testimonials() {
   const { data, isLoading, error } = useAllTestimonialData();
@@ -28,13 +35,25 @@ export default function Testimonials() {
 
   if (!isLoading && allTestimonials.length > 0) {
     content = (
-      <div className="p-4 text-white">
-        {allTestimonials.map((testimonial) => (
-          <div key={testimonial._id} className="mb-4">
-            <p className="text-lg">{testimonial.message}</p>
-            <p className="text-sm text-gray-400">- {testimonial.name}</p>
-          </div>
-        ))}
+      <div className="bg-slate-800 max-w-5xl mx-auto px-4 py-8">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={10}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 4000 }}
+          breakpoints={{
+            768: { slidesPerView: 1 },
+            1024: { slidesPerView: 1 },
+          }}
+        >
+          {allTestimonials.map((testimonial) => (
+            <SwiperSlide key={testimonial._id}>
+              <TestimonialCard testimonial={testimonial} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     );
   }
