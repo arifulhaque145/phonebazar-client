@@ -4,16 +4,71 @@ import SearchSection from "../components/phone/SearchSection";
 import { useAllProductData } from "../hooks/useProducts";
 
 export default function Products() {
-  const { data } = useAllProductData();
+  const { data, isLoading, error } = useAllProductData();
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
+
+  const allPhones = data || [];
 
   const [page, setPage] = useState(1);
   const itemsPerPage = 8;
 
+  if (isLoading) {
+    return (
+      <div className="text-center text-white py-12">
+        <h2 className="text-3xl font-light uppercase mb-4">Loading...</h2>
+        <p>Please wait while we fetch the products.</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center text-red-400 py-12">
+        <h2 className="text-3xl font-light uppercase mb-4">
+          Error Loading Products
+        </h2>
+        <p>There was an error fetching the products. Please try again later.</p>
+      </div>
+    );
+  }
+
+  if (allPhones.length === 0) {
+    return (
+      <div className="text-center text-white py-12">
+        <h2 className="text-3xl font-light uppercase mb-4">
+          No Products Available
+        </h2>
+        <p>Please check back later or try a different search.</p>
+      </div>
+    );
+  }
+
+  if (query && !filteredProducts.length) {
+    return (
+      <div className="text-center text-white py-12">
+        <h2 className="text-3xl font-light uppercase mb-4">
+          No Products Found
+        </h2>
+        <p>No products match your search query. Please try a different term.</p>
+      </div>
+    );
+  }
+
+  if (!allPhones || allPhones.length === 0) {
+    return (
+      <div className="text-center text-white py-12">
+        <h2 className="text-3xl font-light uppercase mb-4">
+          No Products Found
+        </h2>
+        <p>Please check back later or try a different search.</p>
+      </div>
+    );
+  }
+
   // Filter
   let filteredProducts =
-    data?.filter((item) =>
+    allPhones?.filter((item) =>
       item.model.toLowerCase().includes(query.toLowerCase())
     ) || [];
 

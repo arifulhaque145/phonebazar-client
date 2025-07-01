@@ -9,7 +9,7 @@ export const useAllProductData = () => {
     queryKey: ["phones"],
     queryFn: async () => {
       const data = await axiosPublic.get("/phones").then((res) => res.data);
-      return data;
+      return data?.data || [];
     },
   });
 };

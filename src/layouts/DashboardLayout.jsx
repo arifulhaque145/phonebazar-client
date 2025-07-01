@@ -6,15 +6,21 @@ export default function DashboardLayout() {
   return (
     <div className="drawer lg:drawer-open">
       <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
+
       <div className="drawer-content flex flex-col">
+        <label
+          htmlFor="dashboard-drawer"
+          className="btn btn-primary drawer-button lg:hidden m-4"
+        >
+          Open Menu
+        </label>
         <Navbar />
-        <main className="p-4">
+        <div className="p-4">
           <Outlet />
-        </main>
+        </div>
       </div>
-      <div className="drawer-side">
-        <Sidebar />
-      </div>
+
+      <Sidebar />
     </div>
   );
 }
